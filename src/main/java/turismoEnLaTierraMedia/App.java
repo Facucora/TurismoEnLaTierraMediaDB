@@ -24,7 +24,6 @@ public class App {
 		sugeriblesUsuario = new LinkedList<Sugerible>();
 	
 	
-//		System.out.println(UsuarioDAO.findAll());
 		atraccionesAll = AtraccionDAO.findAll(); // Lee el archivo, crea las atracciones y las guarda en
 		// una lista
 		sugeribles.addAll(atraccionesAll);
@@ -34,7 +33,6 @@ public class App {
 		promociones = PromocionDAO.findAll(); // Lee el archivo, crea las promociones y las guarda en
 		// una lista
 		sugeribles.addAll(promociones);
-//		System.out.println(sugeribles);
 //
 		System.out.println("USUARIOS\n");
 		for (Usuario u : usuarios)
@@ -106,10 +104,9 @@ public class App {
 				
 			}
 			System.out.println("\n");
-
+			UsuarioDAO.update(u); 
 		}
 		
 		System.out.println("NO HAY MÁS USUARIOS");
-		System.out.println(atraccionesAll);
 	}
 }

@@ -90,7 +90,6 @@ public class UsuarioDAO{
 		try {
 			String sql = "UPDATE USUARIO SET PRESUPUESTO = ?, TIEMPO = ? WHERE ID = ?";
 			Connection conn = TurismoConnectionProvider.getConnection();
-			
 			PreparedStatement statement = conn.prepareStatement(sql);
 			statement.setInt(1, t.getPresupuesto());
 			statement.setDouble(2, t.getTiempoDisponible());

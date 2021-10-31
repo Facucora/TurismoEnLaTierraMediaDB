@@ -82,43 +82,25 @@ public class PromocionDAO {
 		}
 
 		public static int insert(Promocion t) {
-			Connection conn = null;
+			 
 			try {
-				String sql = "INSERT INTO PROMOCION (ID, NOMBRE, PRECIO, TIEMPO, CUPO, TIPO) VALUES(?, ?, ?, ?, ?, ?)";
-				conn = TurismoConnectionProvider.getConnection();
+				String sql = "INSERT INTO PROMOCION (ID, NOMBRE, TIPO, PRECIO_DESC, BENEFICIO) VALUES(?, ?, ?, ?, ?)";
+				Connection conn = TurismoConnectionProvider.getConnection();
 				
 				PreparedStatement statement = conn.prepareStatement(sql);
 				
-				
-				String querry = "SELECT Beneficio FROM PROMOCION WHERE beneficio LIKE \"Porcentual\"";
-				conn = TurismoConnectionProvider.getConnection();
-				
-				PreparedStatement statement2 = conn.prepareStatement(querry);
-				ResultSet result = statement2.executeQuery();
-				result.next();
-				String total = result.getString("TIPO");
-				if(total == "porcentual")
-				
-				
 				statement.setInt(1, t.getId());
 				statement.setString(2, t.getNombre());
-				statement.setInt(3, t.getCosto());
-				statement.setDouble(4, t.getTiempo());
-				statement.setString(5, t.getTipo().name());
+				statement.setString(3, t.getTipo().name());
+				statement.setInt(4, t.getCosto());
+				statement.setString(5, t.getBeneficio());
 				
 							
 				return statement.executeUpdate();
 			} catch (SQLException e) {
 				throw new MissingDataException(e);
-			}finally {
-					  if (conn != null) {
-					    try {
-					      conn.close(); 
-					    } catch (SQLException e) {
-					    	throw new MissingDataException(e);
-					    }
-					  }
-					}
+				}
+					
 			}
 
 

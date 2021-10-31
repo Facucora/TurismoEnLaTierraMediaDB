@@ -10,6 +10,9 @@ import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
+
+import dao.AtraccionDAO;
+import dao.PromocionDAO;
 import turismoEnLaTierraMedia.TipoDeAtraccion;
 import turismoEnLaTierraMedia.*;
 
@@ -30,9 +33,9 @@ public class TurismoDBTests {
 
 		@Before
 		public void setUp() {
-		listaAtracciones = AdministradorDeArchivos.leerAtracciones();
-		listaPromo = AdministradorDeArchivos.leerPromociones();
-		u1= new Usuario("Pepito", 100, 100, TipoDeAtraccion.AVENTURA);
+		listaAtracciones = AtraccionDAO.findAll();
+		listaPromo = PromocionDAO.findAll();
+		u1= new Usuario(1, "Pepito", 100, 100, TipoDeAtraccion.AVENTURA);
 		a1 = listaAtracciones.get(0);
 		a2 = listaAtracciones.get(1);
 		a3 = listaAtracciones.get(2);

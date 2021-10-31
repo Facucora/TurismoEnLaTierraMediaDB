@@ -145,7 +145,6 @@ public class AtraccionDAO {
 				PreparedStatement statement = conn.prepareStatement(sql);
 				
 	
-				System.out.println(s.esPromocion());
 				if(s.esPromocion()) {
 					for (Atraccion a : ((Promocion) s).getAtracciones()) {
 						statement.setInt(1, a.getId());

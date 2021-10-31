@@ -73,7 +73,9 @@ public abstract class Promocion implements Sugerible {
 	
 	public abstract int getAhorro();
 
-
+	public String getBeneficio() {
+		return this.beneficio;
+	}
 
 
 	public int getId() {
