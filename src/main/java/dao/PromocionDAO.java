@@ -102,6 +102,28 @@ public class PromocionDAO {
 				}
 					
 			}
+		
+		public static int insertAtraccionPromo(Promocion t) {
+			 
+			try {
+				String sql = "INSERT INTO PROMOCION_ATRACCION (ID_PROMO, NOMBRE_PROMO, ID_ATRACCION, NOMBRE_ATRACCION) VALUES(?, ?, ?, ?)";
+				Connection conn = TurismoConnectionProvider.getConnection();
+				
+				PreparedStatement statement = conn.prepareStatement(sql);
+				
+				statement.setInt(1, t.getId());
+				statement.setString(2, t.getNombre());
+				for(Atraccion a: t.getAtracciones()) {
+					statement.setInt(3, (a).getId());
+					statement.setString(4, a.getNombre());
+				}				
+							
+				return statement.executeUpdate();
+			} catch (SQLException e) {
+				throw new MissingDataException(e);
+				}
+					
+			}
 
 
 
