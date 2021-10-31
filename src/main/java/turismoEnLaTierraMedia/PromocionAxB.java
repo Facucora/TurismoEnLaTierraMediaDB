@@ -13,8 +13,10 @@ public class PromocionAxB extends Promocion {
 			TipoDeAtraccion tipo, Atraccion atraccionGratis, String beneficio, List<Atraccion> atracciones) {
 		super(id, nombreDeLaPromo, tipo, beneficio, atracciones);
 		
-		
+		atracciones.remove(this.atraccionGratis);
+		this.atracciones = atracciones;
 		this.atraccionGratis = atraccionGratis;
+	
 		
 	}
 
@@ -22,10 +24,14 @@ public class PromocionAxB extends Promocion {
 	public int getCosto() {
 		precioFinal = 0;
 		
-		for (int i = 0; i < super.atracciones.size(); i++) {
-			if (super.atracciones.get(i).getNombre() != atraccionGratis.getNombre())
-				precioFinal += super.atracciones.get(i).getCosto();
+//		for (int i = 0; i < super.atracciones.size(); i++) {
+//			if (super.atracciones.get(i).getNombre() != atraccionGratis.getNombre())
+//				precioFinal += super.atracciones.get(i).getCosto();
+//		}
+		 for(Atraccion a : this.atracciones) {
+			precioFinal += a.getCosto();
 		}
+		 precioFinal -= this.atraccionGratis.getCosto();
 		return this.precioFinal;
 	}
 
@@ -80,6 +86,12 @@ public class PromocionAxB extends Promocion {
 		
 		}
 	
+	public List<Atraccion> getAtracciones(){
+		List<Atraccion> atraccionAxB;
+		atraccionAxB = this.atracciones;
+		//atraccionAxB.add(getAtraccionGratis());
+		return atraccionAxB;
+	}
 	
 	public boolean hayCupo() {
 		for (Atraccion a : this.atracciones) {
@@ -89,5 +101,6 @@ public class PromocionAxB extends Promocion {
 		return true;
 	}
 
+	
 
 }

@@ -7,6 +7,7 @@ public class PromocionAbsoluta extends Promocion {
 	public PromocionAbsoluta(int id, String nombreDeLaPromo,
 			TipoDeAtraccion tipo, int precioODesc, String beneficio, List<Atraccion> atracciones) {
 		super(id, nombreDeLaPromo, tipo, beneficio, atracciones);
+		this.precioODesc = precioODesc;
 	}
 	
 	public int getCosto() {
@@ -21,7 +22,7 @@ public class PromocionAbsoluta extends Promocion {
 		}
 		return "PromocionAbsoluta: " + nombreDeLaPromo + ", Tipo: " + tipo + "\n" 
 				+ "   Atracciones Incluidas: " + nombreDeLasAtracciones + "\n" 
-				+ "   Tiempo Total: " + this.getTiempo() + ", Precio Total: " + this.getCosto() + "\n"  + "   Ahorro Comprando La Promo: " + this.getAhorro() + " monedas" + "\n";
+				+ "   Tiempo Total: " + this.getTiempo() + ", Precio Total: " + this.precioODesc + "\n"  + "   Ahorro Comprando La Promo: " + this.getAhorro() + " monedas" + "\n";
 	}
 
 	

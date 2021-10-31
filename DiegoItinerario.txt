@@ -1,6 +1,0 @@
-Usuario: Diego
-Tipo de atracción preferida: AVENTURA
-Monedas Gastadas: 0 monedas de oro,  Tiempo necesario: 0.0 horas
-Presupuesto Disponible: 25 monedas de oro, Tiempo Disponible: 10.0 horas
-
-COMPRO:

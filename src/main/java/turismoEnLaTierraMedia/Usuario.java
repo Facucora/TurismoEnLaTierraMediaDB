@@ -94,6 +94,12 @@ public class Usuario {
 	public double getTiempoDisponible() {
 		return this.tiempoDisponible;
 	}
+
+
+	public List<Sugerible> getCompras() {
+		// TODO Auto-generated method stub
+		return this.sugerenciasCompradas;
+	}
 	
 //	public static void main(String[] args) {
 //		Usuario u1 = new Usuario("Camila", 100, 50, TipoDeAtraccion.AVENTURA);

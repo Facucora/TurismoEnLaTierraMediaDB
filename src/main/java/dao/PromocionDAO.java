@@ -27,9 +27,8 @@ public class PromocionDAO {
 		}
 	
 	private static Promocion toPromocionAxB(ResultSet result) throws SQLException {
-		List<Atraccion> atraccionAxB = AtraccionDAO.findAllByPromoId(result.getInt(1));
-		atraccionAxB.remove(AtraccionDAO.findById(result.getInt(4)));
-		return new PromocionAxB(result.getInt(1), result.getString(2), TipoDeAtraccion.valueOf(result.getString(3)), AtraccionDAO.findById(result.getInt(4)), result.getString(5), atraccionAxB);
+	
+		return new PromocionAxB(result.getInt(1), result.getString(2), TipoDeAtraccion.valueOf(result.getString(3)), AtraccionDAO.findById(result.getInt(4)), result.getString(5), AtraccionDAO.findAllByPromoId(result.getInt(1)));
 		
 		}
 	private static Promocion toPromocionAbsoluta(ResultSet result) throws SQLException {
@@ -49,6 +48,7 @@ public class PromocionDAO {
 				while(results.next()) {
 						if(results.getString(5).equals("AxB")) {
 						promociones.add(toPromocionAxB(results));
+						System.out.println(toPromocionAxB(results).getAtracciones());
 						} if(results.getString(5).equals("Porcentual")) {
 							promociones.add(toPromocionPorcentual(results));
 						}if((results.getString(5).equals("Absoluta")))  {
@@ -121,22 +121,7 @@ public class PromocionDAO {
 					}
 			}
 
-		public static int update(Promocion t) {
-			try {
-				String sql = "UPDATE PROMOCION SET PRESUPUESTO = ?, TIEMPO = ? WHERE ID = ?";
-				Connection conn = TurismoConnectionProvider.getConnection();
-				
-				PreparedStatement statement = conn.prepareStatement(sql);
-				statement.setInt(1, t.getCosto());
-				statement.setDouble(2, t.getTiempo());
-				statement.setInt(, t.getId());
 
-				return statement.executeUpdate();
-				
-			} catch (SQLException e) {
-				throw new MissingDataException(e);
-			}
-		}
 
 		public static int delete(Promocion a) {
 			try {
@@ -188,8 +173,15 @@ public class PromocionDAO {
 				
 				List<Promocion> promociones =  new LinkedList<Promocion>();
 				while(results.next()) {
-					promociones.add(toPromocion(results));
-				}
+					if(results.getString(5).equals("AxB")) {
+						promociones.add(toPromocionAxB(results));
+						System.out.println(toPromocionAxB(results).getAtracciones());
+						} if(results.getString(5).equals("Porcentual")) {
+							promociones.add(toPromocionPorcentual(results));
+						}if((results.getString(5).equals("Absoluta")))  {
+						promociones.add(toPromocionAbsoluta(results));
+						}
+			}
 				return promociones;
 			} catch (SQLException e) {
 				throw new MissingDataException(e);

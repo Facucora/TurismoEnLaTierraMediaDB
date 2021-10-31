@@ -13,6 +13,8 @@ import jdbc.TurismoConnectionProvider;
 import turismoEnLaTierraMedia.TipoDeAtraccion;
 import turismoEnLaTierraMedia.App;
 import turismoEnLaTierraMedia.Atraccion;
+import turismoEnLaTierraMedia.Promocion;
+import turismoEnLaTierraMedia.Sugerible;
 
 
 public class AtraccionDAO {
@@ -134,6 +136,32 @@ public class AtraccionDAO {
 				throw new MissingDataException(e);
 			}
 		}
+		
+		public static void updateCupo(Sugerible s) {
+			try {
+				String sql = "UPDATE ATRACCION SET cupo = cupo - 1 WHERE id = ?";
+
+				Connection conn = TurismoConnectionProvider.getConnection();
+				PreparedStatement statement = conn.prepareStatement(sql);
+				
+	
+				System.out.println(s.esPromocion());
+				if(s.esPromocion()) {
+					for (Atraccion a : ((Promocion) s).getAtracciones()) {
+						statement.setInt(1, a.getId());
+						statement.executeUpdate();
+					}
+				}else {
+					statement.setInt(1, s.getId());
+					statement.executeUpdate();
+
+				}
+				
+			} catch (SQLException e) {
+				throw new MissingDataException(e);
+			}
+		}
+
 
 		public static int delete(Atraccion a) {
 			try {

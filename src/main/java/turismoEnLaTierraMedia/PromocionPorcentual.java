@@ -5,12 +5,17 @@ import java.util.List;
 public class PromocionPorcentual extends Promocion {
 	
 	private int precioFinal;
+	private int precio;
 	
 	
 	public PromocionPorcentual(int id, String nombreDeLaPromo, TipoDeAtraccion tipo, 
-			int precioODesc, String beneficio, List<Atraccion> atracciones) {
+			int precio, String beneficio, List<Atraccion> atracciones) {
 		super(id, nombreDeLaPromo, tipo, beneficio, atracciones); 
-		this.precioODesc = precioODesc;
+		this.precio = precio;
+	}
+	
+	public int getPrecioDesc() {
+		return this.precio;
 	}
 
 
@@ -20,7 +25,8 @@ public class PromocionPorcentual extends Promocion {
 		precioFinal = 0;
 		for (int i = 0; i < super.atracciones.size(); i++) {
 			precioFinal += super.atracciones.get(i).getCosto();
-			precioARedondear = -((precioFinal*(precioODesc/100))-precioFinal);			
+			precioARedondear = -((precioFinal*this.precio/100)-precioFinal);			
+
 		}
 		return  (int) Math.round(precioARedondear);
 	}
@@ -32,10 +38,10 @@ public class PromocionPorcentual extends Promocion {
 		for(Atraccion a:atracciones) {
 			nombreDeLasAtracciones += a.getNombre() + ", ";
 		}
-		return "PromocionPorcentual: " + nombreDeLaPromo + ", Tipo: " + tipo + ", Porcentaje De Descuento: " + precioODesc + "%"
+		return "PromocionPorcentual: " + nombreDeLaPromo + ", Tipo: " + tipo + ", Porcentaje De Descuento: " + this.precio + "%"
 				+ "\n" +"   Atracciones Incluidas: " + nombreDeLasAtracciones + "\n"
 				+ "   Tiempo Total: " + this.getTiempo() + ", Precio Final: " + this.getCosto() +  "\n"  + 
-				"   Ahorro Comprando La Promo: " + this.getAhorro() + " monedas" + "\n";
+				"   Ahorro Comprando La Promo: " + this.getAhorro() + " monedas" + "\n" ;
 				
 	}
 
@@ -54,4 +60,6 @@ public class PromocionPorcentual extends Promocion {
 		} 
 		return  (precioReal - this.getCosto());
 	}
+	
+
 }

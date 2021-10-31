@@ -26,5 +26,7 @@ List <Sugerible> atraccionComprada = new LinkedList<Sugerible>();
 	@Override
 	public String toString();
 
+	public int getId();
+
 
 }

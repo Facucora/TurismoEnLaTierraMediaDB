@@ -62,6 +62,7 @@ public class App {
 
 				while (u.tieneTiempo(s1) && u.puedeCostear(s1) && !u.yaCompro(s1) && s1.hayCupo()) {
 					sugeriblesUsuario.add(s1);
+					
 
 					System.out.println("=============================================================\n");
 
@@ -80,15 +81,19 @@ public class App {
 					opcion = entradaEscanerOpcion.nextLine(); // Invocamos un método sobre un objeto Scanner;
 					if (opcion.equals("n") || opcion.equals("N")) {
 						System.out.println("\n");
-						AdministradorDeArchivos.escribirItinerarioDeLosUsuarios(usuarios);
+						
 						break;
 					}
 					if (opcion.equals("s") || opcion.equals("S")) {
+						
 						u.comprarSugerible(s1);
 						System.out.println("SUGERENCIA COMPRADA");
 						System.out.println("TIEMPO DISPONIBLE: " + u.getTiempoDisponible());
 						System.out.println("PRESUPUESTO RESTANTE: " + u.getPresupuesto());
-						AdministradorDeArchivos.escribirItinerarioDeLosUsuarios(usuarios);
+						
+						ItinerarioDAO.insert(u);
+						AtraccionDAO.updateCupo(s1);
+
 						continue;
 					}
 					if (!opcion.equals("s") || !opcion.equals("n") || opcion.equals("N") || opcion.equals("S")) {
@@ -98,11 +103,13 @@ public class App {
 					}
 
 				}
-
+				
 			}
 			System.out.println("\n");
 
 		}
+		
 		System.out.println("NO HAY MÁS USUARIOS");
+		System.out.println(atraccionesAll);
 	}
 }
